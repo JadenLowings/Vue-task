@@ -38,7 +38,6 @@ function hov(number) {
       console.error("Error when trying to convert nums[i] value to an integer.");
       return;
     }
-
     // - Using validNumber as both validNumber and num are integers.
     // This will help avoid unexpected issues when performing calculations.
     if(validNumber % num === 0) {
@@ -57,30 +56,78 @@ function reset() {
 </script>
 
 <template>
-	<div>
-		<input type="number" v-model="limit" /><br /><br />
-		<div class="number"
-			:id="'number-'+number"
-			v-for="number in n()"
-			:key="number"
-			@mouseover="hov(number)"
-			@mouseout="reset"
-		>
-			{{ number }}
-		</div>
+  <!-- Added additional div to use css positioning instead of line breaks. -->
+	<div class="number-container">
+      <div class="input-field">
+        <!-- Added a heading to help the user quickly identify what the input is used for. -->
+        <h3>Limit: </h3>
+        <!-- Added the min and max tags to conform with project requirements 'from 1 to 100'. -->
+        <input type="number"
+               id="user-limit"
+               v-model="limit"
+               max="100"
+               min="1" />
+    </div>
+    <div>
+      <div class="number"
+           :id="'number-'+number"
+           v-for="number in n()"
+           :key="number"
+           @mouseover="hov(number)"
+           @mouseout="reset">
+        {{ number }}
+      </div>
+    </div>
 	</div>
 </template>
 
 <style>
+/*
+- I used flexbox because it allows me to easily position elements
+and resizes automatically allowing a responsive design.
+*/
+.number-container {
+  display: flex;
+  flex-direction: column;
+}
+.input-field {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-field h3 {
+  margin-right: 10px;
+}
+
+.input-field #user-limit {
+  padding: 10px;
+  border: transparent;
+  border-radius: 10px;
+}
+
+/*
+- Changed the width, border-radius and color to
+display the data in a more user friendly manner.
+*/
 .number {
-	display: inline-block;
+  display: inline-block;
 	padding: 5px;
+  min-width: 30px;
+  border-radius: 10px;
 	background-color: lightgrey;
   color: black;
 	margin: 5px;
 }
 
+/*
+- Changed the background-color to look better with the app background.
+- Added bold font and transformed scale to make it easier for the user to
+quickly identify highlighted data.
+*/
 .active {
-	background-color: red;
+	background-color: #91E5F6;
+  font-weight: bold;
+  transform: scale(1.2);
 }
 </style>
