@@ -38,11 +38,14 @@ function hov(number) {
       console.error("Error when trying to convert nums[i] value to an integer.");
       return;
     }
+    // - Added the below condition due to project specifications.
+    // 'user hovers over 21, the numbers 1, 3, 7 would be highlighted.'
+    if (validNumber === num) continue;
     // - Using validNumber as both validNumber and num are integers.
     // This will help avoid unexpected issues when performing calculations.
     if(validNumber % num === 0) {
       nums[i].classList.add('active');
-      console.log('divisor', num);
+      // - Removed console.log() so that there are no unnecessary logs.
     }
   }
 }
