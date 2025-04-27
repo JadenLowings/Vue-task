@@ -3,7 +3,8 @@ import { ref } from 'vue'
 
 // - Removed numbers declaration as it was not needed.
 // - Adding ref to change limit on user input.
-let limit = ref(100);
+// - Changed let limit -> const limit to prevent unwanted reassignment.
+const limit = ref(100);
 
 function n() {
   let numbers = [];
