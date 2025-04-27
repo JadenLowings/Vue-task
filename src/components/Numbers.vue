@@ -49,7 +49,9 @@ function hov(number) {
 }
 
 function reset() {
-  const nums = document.querySelectorAll('.number');
+  // - Only selecting elements with both classes .number and .active
+  // to reduce the amount of records to iterate through.
+  const nums = document.querySelectorAll('.number.active');
   nums.forEach(num => num.classList.remove('active'));
 }
 </script>
