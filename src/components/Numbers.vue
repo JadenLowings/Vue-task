@@ -1,11 +1,20 @@
 <script setup lang="ts">
-const numbers = [];
-let limit = 100;
+import { ref } from 'vue'
+
+// - Removed numbers declaration as it was not needed.
+// - Adding ref to change limit on user input.
+let limit = ref(100);
 
 function n() {
   let numbers = [];
-  for(var i = 0; i < limit; i++) {
-    numbers = [...numbers, i];
+  // - Changed var to let. Var would be visible outside the
+  // for loop and is considered bad practice.
+  // - Changed limit -> limit.value to target the data within the object.
+  for(let i = 0; i < limit.value; i++) {
+    // - Used .push() to manipulate the existing
+    // array instead of creating a new one with each iteration.
+    // This was to reduce performance cost.
+    numbers.push(i);
   }
   return numbers.sort(() => Math.random() - 0.5);
 }
