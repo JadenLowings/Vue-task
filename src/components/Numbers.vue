@@ -20,11 +20,28 @@ function n() {
 }
 
 function hov(number) {
+  // - Converting the given value to an integer to ensure the type.
+  const validNumber = parseInt(number);
+  // - Adding a check to ensure value is a valid integer before continuing with the function.
+  if (isNaN(validNumber)) {
+    console.error("Error given value 'number' is not a valid integer.");
+    return;
+  }
   const nums = document.querySelectorAll('.number');
   for(let i = 0; i < nums.length; i++) {
-    const num = nums[i].textContent.trim();
+    // - I used the ? operator to safely access the nested property and
+    // return undefined in the case that nums[i].textContent is null.
+    // - I used the ?? operator to return an empty string in the case of an issue.
+    // This causes parseInt to return NaN triggering my error handling.
+    const num = parseInt(nums[i].textContent?.trim() ?? "");
+    if (isNaN(num)) {
+      console.error("Error when trying to convert nums[i] value to an integer.");
+      return;
+    }
 
-    if(number % num === 0) {
+    // - Using validNumber as both validNumber and num are integers.
+    // This will help avoid unexpected issues when performing calculations.
+    if(validNumber % num === 0) {
       nums[i].classList.add('active');
       console.log('divisor', num);
     }
